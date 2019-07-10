@@ -5,7 +5,7 @@ export default class Product extends Component {
     return (
       <div className="col-3 product-item">
         <div className="card text-left">
-          <button className="btn btn-danger button-delete">
+          <button onClick={()=>this.props.deleteProductAction(this.props.id)} className="btn btn-danger button-delete">
             <i className="fa fa-times" aria-hidden="true"></i>
           </button>
           <img className="card-img-top" src={this.props.image} alt={this.props.product_name}   />

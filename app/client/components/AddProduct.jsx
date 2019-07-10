@@ -21,6 +21,11 @@ export default class AddProduct extends Component {
   handleClick = () => {
     var {product_name,product_price,image} = this.state;
     this.props.addProductAction(product_name,product_price,image);
+    this.setState({
+      product_name:'',
+      product_price:'',
+      image:''
+    })
   }
 
   render() {
@@ -33,7 +38,7 @@ export default class AddProduct extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="product_price">Giá sản phẩm</label>
-            <input onChange={(event)=> this.isChange(event)} type="text" className="form-control" name="product_price" id="product_price" aria-describedby="name_text" placeholder="Nhập giá sản phẩm" />
+            <input onChange={(event)=> this.isChange(event)} type="number" className="form-control" name="product_price" id="product_price" aria-describedby="name_text" placeholder="Nhập giá sản phẩm" />
           </div>
           <div className="form-group">
             <label htmlFor="image">Đường link ảnh sản phẩm</label>
