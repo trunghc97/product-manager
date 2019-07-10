@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Product from './Product'
+import AddProduct from './AddProduct'
+import Header from './Header';
+import Footer from './Footer'
 
 export default class App extends Component {
   constructor(props) {
@@ -9,7 +12,13 @@ export default class App extends Component {
     }
   }
   componentWillMount() {
-    this.setState({ data: Object.values(this.props) });
+    this.setState({ data: Object.values(this.props.data) });
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    if (previousProps.data !== this.props.data) {
+      this.setState({ data: Object.values(this.props.data) });
+    }
   }
 
   printData = () => {
@@ -26,14 +35,23 @@ export default class App extends Component {
 
   render() {
     return(
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <div className="row">
-              {this.printData()}
+      <div>
+        <Header />
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-9">
+              <div className="row">
+                {this.printData()}
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="row">
+                <AddProduct addProductAction = {this.props.addProductAction} />
+              </div>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }
