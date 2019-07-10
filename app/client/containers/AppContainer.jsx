@@ -16,11 +16,17 @@ export default class AppContainer extends Component {
   }
 
   addProductAction = (name, price, image) => {
-    var tempData = {};
     const token = document.getElementsByName('csrf-token')[0].content;
-    axios.post('/products',{product: {name,price,image}}, {
+    axios.post(path.root(),{product: {name,price,image}}, {
       headers: {'X-CSRF-Token': token}
     }).then(resp => {
+      this.setState({data: resp.data});
+    });
+  }
+
+  deleteProductAction = (id) => {
+    const token = document.getElementsByName('csrf-token')[0].content;
+    axios.delete(path.delete(id),{headers: {'X-CSRF-Token': token}}).then((resp) => {
       this.setState({data: resp.data});
     });
   }
@@ -29,7 +35,8 @@ export default class AppContainer extends Component {
     return (
       <App
       data={this.state.data}
-      addProductAction = {this.addProductAction} />
+      addProductAction = {this.addProductAction}
+      deleteProductAction = {this.deleteProductAction} />
     )
   }
 }

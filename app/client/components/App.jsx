@@ -25,7 +25,9 @@ export default class App extends Component {
     if(this.state.data !== null){
       return this.state.data.map((item, index)=>
          (<Product
+           deleteProductAction = {this.props.deleteProductAction}
            key={index}
+           id ={item.id}
            product_name={item.name}
            product_price={item.price}
            image={item.image}   />)
