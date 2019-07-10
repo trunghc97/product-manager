@@ -1,8 +1,7 @@
-import App from '../../client/components/App'
-import Product from '../../client/components/Product'
+import AppContainer from '../../client/containers/AppContainer'
 
 const components = {
-  App, Product
+  AppContainer
 };
 
 export default components
