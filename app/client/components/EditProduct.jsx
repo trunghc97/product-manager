@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import Errors from './Errors'
 
 export default class EditProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        product_name:'',
-        product_price:'',
-        image:''
+      errors: [],
+      product_name:'',
+      product_price:'',
+      image:''
     }
   }
 
@@ -37,19 +39,53 @@ export default class EditProduct extends Component {
   }
 
   handleClick = () => {
+    let errors = []
     var {product_name,product_price,image} = this.state;
-    this.props.editProductAction(this.props.id, product_name, product_price, image);
-    this.setState({
-      product_name:'',
-      product_price:'',
-      image:''
-    })
+    if(product_name.length === 0){
+      errors.push("Product name can't be empty");
+    }
+    if(product_name.length > 255){
+      errors.push("Product name too long");
+    }
+    if(product_price%1 !==0) {
+      errors.push("Price must be Number");
+    }
+    if(product_price.length === 0){
+      errors.push("Price can't be empty")
+    }
+    if (errors.length === 0){
+      this.props.editProductAction(this.props.id, product_name, product_price, image);
+      this.setState({
+        product_name:'',
+        product_price:'',
+        image:'',
+        errors: []
+      })
+    } else {
+      this.setState({
+        errors: errors
+      }, function() {})
+    }
+  }
+
+  printErrors = () => {
+    if(this.state.errors !== null){
+      return this.state.errors.map((item, index)=> (
+          <Errors
+            key={index}
+            error={item} />
+        )
+      )
+    }
   }
 
   render() {
     return (
       <div className="container">
         <form >
+          <ul>
+            {this.printErrors()}
+          </ul>
           <div className="form-group">
             <label htmlFor="product_name">Product Name</label>
             <input onChange={(event)=> this.isChange(event)} type="text" className="form-control" name="product_name"
