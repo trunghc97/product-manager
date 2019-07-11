@@ -8,9 +8,15 @@ class ProductsController < ApplicationController
     render json: @products = Product.all.order_decs.to_json
   end
 
+  def update
+    product = Product.find_by id: params[:id]
+    product.update product_params
+    render json: @products = Product.all.order_decs.to_json
+  end
+
   def destroy
-    @product = Product.find_by id: params[:id]
-    @product.destroy
+    product = Product.find_by id: params[:id]
+    product.destroy
     render json: @products = Product.all.order_decs.to_json
   end
 
