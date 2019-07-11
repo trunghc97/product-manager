@@ -16,7 +16,7 @@ export default class Product extends Component {
               {this.props.product_name}
                </b>
               <i className=" float-right">
-              {this.props.product_price}
+              {this.props.product_price} đ
                </i>
             </div>
           </div>

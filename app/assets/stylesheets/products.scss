@@ -23,3 +23,8 @@
 .footer-color {
   background-color: #e9ecef;
 }
+.product-item{
+  &:hover{
+    cursor: pointer;
+  }
+}
