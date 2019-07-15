@@ -13,7 +13,9 @@ export default class AppContainer extends Component {
   }
 
   componentWillMount() {
-    this.setState({data: this.props});
+    this.setState({
+      data: this.props.data
+    });
   }
 
   addProductAction = (name, price, image) => {
@@ -50,6 +52,7 @@ export default class AppContainer extends Component {
       <App
       data={this.state.data}
       isEdit={this.state.isEdit}
+      current_user={this.props.current_user}
       addProductAction = {this.addProductAction}
       addProduct = {this.addProduct}
       deleteProductAction = {this.deleteProductAction}
