@@ -29,6 +29,19 @@ export default class SideBarContainer extends Component {
     });
   }
 
+  handleSignUp = (name, email, password) => {
+    const token = document.getElementsByName('csrf-token')[0].content;
+    axios.post(path.sign_up(), {name,email,password}, {
+      headers: {'X-CSRF-Token': token}
+    }).then(resp => {
+      this.setState({
+        data: resp.data.data,
+        current_user: resp.data.current_user
+      });
+      window.location.href = path.root();
+    });
+  }
+
   logout = () => {
     axios.delete(path.log_out()).then(res => {
         window.location.href = path.root()
@@ -40,6 +53,7 @@ export default class SideBarContainer extends Component {
       <SideBar
         current_user = {this.state.current_user}
         handleSignIn = {this.handleSignIn}
+        handleSignUp = {this.handleSignUp}
         logout = {this.logout} />
     )
   }

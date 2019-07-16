@@ -106,7 +106,9 @@ export default function SideBar(props) {
                 handleClickSignUp = {handleClickSignUp}
                 handleSignIn = {props.handleSignIn}/>
   } else if (sidebar == 1) {
-    sideBar = <SignUp handleClickSignIn = {handleClickSignIn} />
+    sideBar = <SignUp
+                handleClickSignIn = {handleClickSignIn}
+                handleSignUp = {props.handleSignUp} />
   } else {
     sideBar = <Profile
                 current_user = {props.current_user}

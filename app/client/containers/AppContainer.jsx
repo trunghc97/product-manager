@@ -9,7 +9,8 @@ export default class AppContainer extends Component {
     isEdit: false,
     product_name:'',
     product_price:'',
-    image:''
+    image:'',
+    current_user: ''
   }
 
   componentWillMount() {
@@ -23,14 +24,20 @@ export default class AppContainer extends Component {
     axios.post(path.root(),{product: {name,price,image}}, {
       headers: {'X-CSRF-Token': token}
     }).then(resp => {
-      this.setState({data: resp.data});
+        this.setState({
+          data: resp.data.data,
+          current_user: resp.data.current_user
+        })
     });
   }
 
   deleteProductAction = (id) => {
     const token = document.getElementsByName('csrf-token')[0].content;
     axios.delete(path.delete(id),{headers: {'X-CSRF-Token': token}}).then((resp) => {
-      this.setState({data: resp.data});
+      this.setState({
+        data: resp.data.data,
+        current_user: resp.data.current_user
+      });
     });
   }
 
@@ -39,7 +46,10 @@ export default class AppContainer extends Component {
     axios.put(path.edit(id),{product: {id,name,price,image}},{
       headers: {'X-CSRF-Token': token}
     }).then((resp) => {
-      this.setState({data: resp.data});
+        this.setState({
+          data: resp.data.data,
+          current_user: resp.data.current_user
+        })
     });
   }
 

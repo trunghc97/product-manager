@@ -8,11 +8,16 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     @user = User.find_by email: params[:session][:email]
-    if @user
+    if @user.valid_password?(params[:session][:password])
       sign_in @user
       render json: @products = {
                       data: Product.all.order_decs.as_json,
                       current_user: @user
+                    }
+    else
+      render json: @products = {
+                      data: Product.all.order_decs.as_json,
+                      current_user: ''
                     }
     end
 
