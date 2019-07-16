@@ -1,23 +1,43 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all.order_decs.to_json
+    @products = {
+      data: Product.all.order_decs.as_json,
+      current_user: current_user || ''
+    }
   end
 
   def create
     Product.create product_params
-    render json: @products = Product.all.order_decs.to_json
+    if current_user
+      render json: @products = {
+                      data: Product.all.order_decs.as_json,
+                      current_user: current_user || ''
+                    }
+    else
+      render json: @products = {
+                      data: Product.all.order_decs.as_json,
+                      current_user: current_user || ''
+                    }
+    end
+
   end
 
   def update
     product = Product.find_by id: params[:id]
     product.update product_params
-    render json: @products = Product.all.order_decs.to_json
+    render json: @products = {
+                    data: Product.all.order_decs.as_json,
+                    current_user: current_user || ''
+                  }
   end
 
   def destroy
     product = Product.find_by id: params[:id]
     product.destroy
-    render json: @products = Product.all.order_decs.to_json
+    render json: @products = {
+                    data: Product.all.order_decs.as_json,
+                    current_user: current_user || ''
+                  }
   end
 
   private

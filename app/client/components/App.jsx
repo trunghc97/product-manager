@@ -14,7 +14,8 @@ export default class App extends Component {
       id: '',
       product_name: '',
       product_price: '',
-      image: ''
+      image: '',
+      open: false
     }
   }
   componentWillMount() {
@@ -29,6 +30,14 @@ export default class App extends Component {
       });
     }
   }
+
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
 
   printData = () => {
     if(this.state.data !== null){
@@ -70,7 +79,11 @@ export default class App extends Component {
 
     return(
       <div>
-        <Header addProduct = {this.props.addProduct} />
+        <Header
+          current_user = {this.props.current_user}
+          addProduct = {this.props.addProduct}
+          handleDrawerOpen = {this.handleDrawerOpen}
+          handleDrawerClose = {this.handleDrawerClose} />
         <div className="container-fluid">
           <div className="row">
             <div className="col-9">
