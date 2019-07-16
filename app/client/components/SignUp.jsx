@@ -40,6 +40,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp(props) {
   const classes = useStyles();
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  function changeName(event) {
+    setName(event.target.value);
+  }
+  function changeEmail(event) {
+    setEmail(event.target.value);
+  }
+  function changePassword(event) {
+    setPassword(event.target.value);
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -62,6 +75,7 @@ export default function SignUp(props) {
                 fullWidth
                 id="name"
                 label="Name"
+                onChange={(event) => changeName(event)}
                 autoFocus
               />
             </Grid>
@@ -74,6 +88,7 @@ export default function SignUp(props) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={(event) => changeEmail(event)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -86,15 +101,16 @@ export default function SignUp(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(event) => changePassword(event)}
               />
             </Grid>
           </Grid>
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => props.handleSignUp(name,email,password)}
           >
             Sign Up
           </Button>

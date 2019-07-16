@@ -7,7 +7,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    super
+    @user = User.new sign_up_params
+    if @user.save
+      sign_in @user
+      render json: @products = {
+                      data: Product.all.order_decs.as_json,
+                      current_user: @user
+                    }
+    else
+      render json: @products = {
+                      data: Product.all.order_decs.as_json,
+                      current_user: ""
+                    }
+    end
   end
 
   def destroy
@@ -35,4 +47,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def sign_up_params
+    params.require(:registration).permit :name, :email, :password
+  end
 end
