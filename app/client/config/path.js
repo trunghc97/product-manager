@@ -1,4 +1,4 @@
-const origin = "http://localhost:3000"
+const origin = "https://product-manager-trunghc.herokuapp.com"
 
 const Path = {
   root: () => `${origin}/products`,
