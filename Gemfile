@@ -7,7 +7,7 @@ ruby "2.5.1"
 gem "rails", "~> 5.2.3"
 gem "react_on_rails", "11.2.2"
 # Use Puma as the app server
-gem "puma", "~> 3.11"
+gem "puma", "~> 4.3"
 gem "devise"
 gem "pg"
 gem "bootstrap", "~> 4.0.0"
